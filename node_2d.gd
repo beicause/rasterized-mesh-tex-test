@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
     rasterizer = RenderingServer.mesh_rasterizer_create(tex_size, tex_size, false)
     if mesh != null and mesh.get_rid().is_valid():
         RenderingServer.mesh_rasterizer_set_mesh(rasterizer, mesh.get_rid(), 0)
-    tex = RenderingServer.texture_rd_create(RenderingServer.mesh_rasterizer_get_texture_rd(rasterizer))
+    tex = RenderingServer.texture_rd_create(RenderingServer.mesh_rasterizer_get_rd_texture(rasterizer))
 
     r += delta / 8
     if r > 1.0: r = 0;

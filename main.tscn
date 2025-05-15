@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpfnceol8x62"]
+[gd_scene load_steps=10 format=3 uid="uid://dpfnceol8x62"]
 
 [ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://raster_tex.gdshader" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://duu1dgpeaic17" path="res://sprite_2d_2.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://duu1dgpeaic17" path="res://node_2d.gd" id="3_h2yge"]
+[ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="4_1bvp3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
 shader = ExtResource("1_0xm2m")
@@ -19,12 +20,19 @@ material = SubResource("ShaderMaterial_1bvp3")
 
 [sub_resource type="PrismMesh" id="PrismMesh_h2yge"]
 
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_lquwl"]
+mesh = ExtResource("4_1bvp3")
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(283, 206)
+position = Vector2(207, 234)
 texture = SubResource("RasterizedMeshTexture_7dm0k")
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("3_h2yge")
 mesh = SubResource("PrismMesh_h2yge")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(534, 242)
+texture = SubResource("RasterizedMeshTexture_lquwl")
