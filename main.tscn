@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://2bfqeuhf8nf"]
+[gd_scene load_steps=16 format=3 uid="uid://2bfqeuhf8nf"]
 
+[ext_resource type="PackedScene" uid="uid://s0475iagfams" path="res://script_test.tscn" id="2_0xm2m"]
 [ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="4_1bvp3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1bvp3"]
@@ -95,5 +96,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.55646)
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
-position = Vector2(163, 271)
+position = Vector2(797, 164)
 texture = SubResource("RasterizedMeshTexture_w48qg")
+
+[node name="Sprite2D2" parent="." instance=ExtResource("2_0xm2m")]

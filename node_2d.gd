@@ -26,7 +26,7 @@ func _draw() -> void:
     attachment.src_alpha_blend_factor = RenderingDevice.BLEND_FACTOR_SRC_ALPHA
     attachment.dst_alpha_blend_factor = RenderingDevice.BLEND_FACTOR_ONE
 
-    RenderingServer.mesh_rasterizer_draw(rasterizer, mt.get_rid(), tex, null, Color(0, 0, 0))
+    RenderingServer.mesh_rasterizer_draw(rasterizer, mt.get_rid(), tex, null, Color(.5, .5, .5))
     var p := Projection.IDENTITY
     p.w[3] = 2
     mt.set_shader_parameter("projection", p)
