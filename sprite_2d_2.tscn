@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://s0475iagfams"]
+
+[ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://raster_tex.gdshader" id="1_s3xjq"]
+[ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_5byhc"]
+[ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="3_i20lr"]
+[ext_resource type="Script" uid="uid://drn2dmqp84mxi" path="res://sprite_2d_2.gd" id="4_5byhc"]
+[ext_resource type="Script" uid="uid://duu1dgpeaic17" path="res://node_2d.gd" id="5_i20lr"]
+
+[sub_resource type="Shader" id="Shader_i20lr"]
+code = "shader_type mesh_rasterizer;
+
+uniform mat4 projection;
+uniform sampler2D base_texture: source_color;
+
+void vertex() {
+    VERTEX = projection * VERTEX;
+}
+
+void fragment() {
+    COLOR = texture(base_texture, UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2a6m"]
+shader = SubResource("Shader_i20lr")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/base_texture = ExtResource("2_5byhc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = ExtResource("1_s3xjq")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/base_texture = ExtResource("2_5byhc")
+
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_lquwl"]
+bg_color = Color(0.559728, 0.590087, 0.815435, 1)
+mesh = ExtResource("3_i20lr")
+material = SubResource("ShaderMaterial_272bh")
+
+[node name="Sprite2D2" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("5_i20lr")
+mesh = ExtResource("3_i20lr")
+mt = SubResource("ShaderMaterial_u2a6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(504, 161)
+texture = SubResource("RasterizedMeshTexture_lquwl")
+script = ExtResource("4_5byhc")

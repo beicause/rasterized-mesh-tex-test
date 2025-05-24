@@ -1,42 +1,41 @@
-@tool
 extends Node2D
 
 @export var mesh: Mesh
 var tex := RID()
 var rasterizer := RID()
-var tex_size := 64
-
+var tex_size := 128
+@export var mt := ShaderMaterial.new()
 
 func _draw() -> void:
-	RenderingServer.canvas_item_add_texture_rect(get_canvas_item(), Rect2(0, 0, tex_size, tex_size), tex)
-
-var r := 0.0
-var increase := 1
-
-func _physics_process(delta: float) -> void:
-	if tex.is_valid():
-		RenderingServer.free_rid(tex)
-	if rasterizer.is_valid():
-		RenderingServer.free_rid(rasterizer)
-
-	tex_size += increase * delta * 100.0
-	if tex_size > 128: increase = -1;
-	if tex_size < 64: increase = 1
+    if tex.is_valid():
+        RenderingServer.free_rid(tex)
+    if rasterizer.is_valid():
+        RenderingServer.free_rid(rasterizer)
 	
-	rasterizer = RenderingServer.mesh_rasterizer_create(tex_size, tex_size, RenderingServer.RASTERIZED_TEXTURE_FORMAT_RGBAH)
-	if mesh != null and mesh.get_rid().is_valid():
-		RenderingServer.mesh_rasterizer_set_mesh(rasterizer, mesh.get_rid(), 0)
-	tex = RenderingServer.texture_rd_create(RenderingServer.mesh_rasterizer_get_rd_texture(rasterizer))
+    if mesh != null and mesh.get_rid().is_valid():
+        rasterizer = RenderingServer.mesh_rasterizer_create(mesh.get_rid(), 0)
 
-	r += delta / 4
-	if r > 1.0: r = 0;
-	RenderingServer.mesh_rasterizer_set_bg_color(rasterizer, Color(r, 0, 0))
+    tex = RenderingServer.texture_drawable_ctreate(tex_size, tex_size, RenderingDevice.DATA_FORMAT_R8G8B8A8_UNORM)
 
-	RenderingServer.mesh_rasterizer_draw(rasterizer)
-	queue_redraw()
+    var attachment := RasterizerBlendState.new()
+    attachment.enable_blend = true
+    attachment.alpha_blend_op = RenderingDevice.BLEND_OP_ADD
+    attachment.color_blend_op = RenderingDevice.BLEND_OP_ADD
+    attachment.src_color_blend_factor = RenderingDevice.BLEND_FACTOR_SRC_ALPHA
+    attachment.dst_color_blend_factor = RenderingDevice.BLEND_FACTOR_ONE
+    attachment.src_alpha_blend_factor = RenderingDevice.BLEND_FACTOR_SRC_ALPHA
+    attachment.dst_alpha_blend_factor = RenderingDevice.BLEND_FACTOR_ONE
+
+    RenderingServer.mesh_rasterizer_draw(rasterizer, mt.get_rid(), tex, null, Color(0, 0, 0))
+    var p := Projection.IDENTITY
+    p.w[3] = 2
+    mt.set_shader_parameter("projection", p)
+    RenderingServer.mesh_rasterizer_draw(rasterizer, mt.get_rid(), tex, attachment, Color(0, 0, 0))
+
+    RenderingServer.canvas_item_add_texture_rect(get_canvas_item(), Rect2(0, 0, tex_size, tex_size), tex)
 
 func _exit_tree():
-	if tex.is_valid():
-		RenderingServer.free_rid(tex)
-	if rasterizer.is_valid():
-		RenderingServer.free_rid(rasterizer)
+    if tex.is_valid():
+        RenderingServer.free_rid(tex)
+    if rasterizer.is_valid():
+        RenderingServer.free_rid(rasterizer)

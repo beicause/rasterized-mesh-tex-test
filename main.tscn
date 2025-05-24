@@ -1,66 +1,125 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpfnceol8x62"]
+[gd_scene load_steps=20 format=3 uid="uid://dpfnceol8x62"]
 
 [ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://raster_tex.gdshader" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://duu1dgpeaic17" path="res://node_2d.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://duu1dgpeaic17" path="res://node_2d.gd" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://s0475iagfams" path="res://sprite_2d_2.tscn" id="3_lquwl"]
 [ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="4_1bvp3"]
-[ext_resource type="Shader" uid="uid://duuucltrbxca0" path="res://monkey.gdshader" id="4_lquwl"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
-shader = ExtResource("1_0xm2m")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/base_texture = ExtResource("2_h2yge")
-
-[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
-size = Vector2(0.5, 1)
-
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_7dm0k"]
-width = 512
-bg_color = Color(0.480721, 0.49723, 0.947895, 1)
-mesh = SubResource("QuadMesh_1bvp3")
-material = SubResource("ShaderMaterial_1bvp3")
-texture_format = 3
-
-[sub_resource type="PrismMesh" id="PrismMesh_1bvp3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
-shader = ExtResource("4_lquwl")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_lquwl"]
-bg_color = Color(0.84026, 0.537459, 0.630388, 0.368627)
-mesh = ExtResource("4_1bvp3")
-material = SubResource("ShaderMaterial_lquwl")
 
 [sub_resource type="SphereMesh" id="SphereMesh_1bvp3"]
+
+[sub_resource type="Shader" id="Shader_1bvp3"]
+code = "shader_type mesh_rasterizer;
+
+uniform mat4 projection;
+uniform sampler2D base_texture: source_color;
+
+void vertex() {
+    VERTEX = projection * VERTEX;
+}
+
+void fragment() {
+    COLOR = texture(base_texture, UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = SubResource("Shader_1bvp3")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_1bvp3"]
 text = "Hellow"
 
 [sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_7mycd"]
 mesh = SubResource("TextMesh_1bvp3")
+material = SubResource("ShaderMaterial_lquwl")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
 shading_mode = 0
 albedo_texture = SubResource("RasterizedMeshTexture_7mycd")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
+shader = ExtResource("1_0xm2m")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_4c57u"]
+bg_color = Color(0.559728, 0.590087, 0.815435, 0.368627)
+mesh = ExtResource("4_1bvp3")
+material = SubResource("ShaderMaterial_kek77")
+generate_mipmaps = true
+
+[sub_resource type="Shader" id="Shader_efxa6"]
+code = "shader_type mesh_rasterizer;
+
+uniform mat4 projection;
+uniform sampler2D base_texture: filter_linear_mipmap,source_color;
+
+void vertex() {
+    VERTEX = projection * VERTEX;
+}
+
+void fragment() {
+	COLOR=textureLod(base_texture,UV,3);
+}
+"
+
+[sub_resource type="Shader" id="Shader_lquwl"]
+code = "shader_type mesh_rasterizer;
+
+uniform mat4 projection;
+uniform sampler2D base_texture: source_color;
+
+void vertex() {
+    VERTEX = projection * VERTEX;
+}
+
+void fragment() {
+    COLOR = texture(base_texture, UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
+shader = SubResource("Shader_lquwl")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_5vw27"]
+mesh = ExtResource("4_1bvp3")
+material = SubResource("ShaderMaterial_7mycd")
+generate_mipmaps = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
+shader = SubResource("Shader_efxa6")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/base_texture = SubResource("RasterizedMeshTexture_5vw27")
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
+
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_w48qg"]
+mesh = SubResource("QuadMesh_1bvp3")
+material = SubResource("ShaderMaterial_dg77c")
+
 [node name="Node2D" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(305, 178)
-texture = SubResource("RasterizedMeshTexture_7dm0k")
+[node name="Sprite2D" type="Node2D" parent="."]
+position = Vector2(133, 72)
+script = ExtResource("2_1bvp3")
 
 [node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("3_h2yge")
-mesh = SubResource("PrismMesh_1bvp3")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(723, 184)
-texture = SubResource("RasterizedMeshTexture_lquwl")
+[node name="Sprite2D2" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(457, 197)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.918039, 0, 0.396491, 0, 1, 0, -0.396491, 0, 0.918039, -0.297318, 0, -0.000807762)
 mesh = SubResource("SphereMesh_1bvp3")
 surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.55646)
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(1865, 925)
+texture = SubResource("RasterizedMeshTexture_4c57u")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(742, 197)
+texture = SubResource("RasterizedMeshTexture_w48qg")
