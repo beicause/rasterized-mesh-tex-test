@@ -1,8 +1,5 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpfnceol8x62"]
+[gd_scene load_steps=15 format=3 uid="uid://2bfqeuhf8nf"]
 
-[ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://raster_tex.gdshader" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://duu1dgpeaic17" path="res://node_2d.gd" id="2_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://s0475iagfams" path="res://sprite_2d_2.tscn" id="3_lquwl"]
 [ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="4_1bvp3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1bvp3"]
@@ -37,28 +34,18 @@ material = SubResource("ShaderMaterial_lquwl")
 shading_mode = 0
 albedo_texture = SubResource("RasterizedMeshTexture_7mycd")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
-shader = ExtResource("1_0xm2m")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_4c57u"]
-bg_color = Color(0.559728, 0.590087, 0.815435, 0.368627)
-mesh = ExtResource("4_1bvp3")
-material = SubResource("ShaderMaterial_kek77")
-generate_mipmaps = true
-
 [sub_resource type="Shader" id="Shader_efxa6"]
 code = "shader_type mesh_rasterizer;
 
 uniform mat4 projection;
-uniform sampler2D base_texture: filter_linear_mipmap,source_color;
+uniform sampler2D base_texture: filter_linear_mipmap;
 
 void vertex() {
     VERTEX = projection * VERTEX;
 }
 
 void fragment() {
-	COLOR=textureLod(base_texture,UV,3);
+	COLOR=textureLod(base_texture,UV,4);
 }
 "
 
@@ -99,15 +86,6 @@ material = SubResource("ShaderMaterial_dg77c")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Sprite2D" type="Node2D" parent="."]
-position = Vector2(133, 72)
-script = ExtResource("2_1bvp3")
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Sprite2D2" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(457, 197)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.918039, 0, 0.396491, 0, 1, 0, -0.396491, 0, 0.918039, -0.297318, 0, -0.000807762)
 mesh = SubResource("SphereMesh_1bvp3")
@@ -116,10 +94,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.55646)
 
-[node name="Sprite2D6" type="Sprite2D" parent="."]
-position = Vector2(1865, 925)
-texture = SubResource("RasterizedMeshTexture_4c57u")
-
 [node name="Sprite2D7" type="Sprite2D" parent="."]
-position = Vector2(742, 197)
+position = Vector2(163, 271)
 texture = SubResource("RasterizedMeshTexture_w48qg")
