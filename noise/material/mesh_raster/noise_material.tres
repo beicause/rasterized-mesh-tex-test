@@ -1,0 +1,39 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://hqn11fayjmj5"]
+
+[ext_resource type="Shader" uid="uid://dufckbcem6hhu" path="res://noise/material/shader/noise_unify.gdshader" id="1_ayou4"]
+
+[sub_resource type="Curve" id="Curve_xo04b"]
+_data = [Vector2(0, 1), 0.0, -3.3333333, 0, 1, Vector2(0.3, 0), -3.3333333, 0.0, 1, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_eahja"]
+width = 64
+texture_mode = 1
+curve = SubResource("Curve_xo04b")
+
+[resource]
+shader = ExtResource("1_ayou4")
+shader_parameter/size = Vector3(1024, 1024, 1024)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/noise_seed = 1337
+shader_parameter/noise_frequency = 0.01499999999941792
+shader_parameter/terrace_enabled = true
+shader_parameter/terrace = 8.0
+shader_parameter/remap_enabled = true
+shader_parameter/remap = SubResource("CurveTexture_eahja")
+shader_parameter/noise_noise_type = 0
+shader_parameter/noise_rotation_type_3d = 0
+shader_parameter/noise_fractal_type = 0
+shader_parameter/noise_octaves = 3
+shader_parameter/noise_lacunarity = 2.0
+shader_parameter/noise_gain = 0.5
+shader_parameter/noise_weighted_strength = 0.0
+shader_parameter/noise_ping_pong_strength = 2.0
+shader_parameter/noise_cellular_distance_func = 1
+shader_parameter/noise_cellular_return_type = 1
+shader_parameter/noise_cellular_jitter_mod = 1.0
+shader_parameter/noise_domain_warp_type = 0
+shader_parameter/noise_domain_warp_amp = 1.0
+shader_parameter/is_3d = true
+shader_parameter/depth = 0.0

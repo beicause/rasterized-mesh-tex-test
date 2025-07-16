@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://2bfqeuhf8nf"]
+[gd_scene load_steps=15 format=3 uid="uid://2bfqeuhf8nf"]
 
 [ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="1_0xm2m"]
 [ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://base_tex.gdshader" id="2_1bvp3"]
 [ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="2_h2yge"]
 [ext_resource type="ArrayMesh" path="res://2d_mesh.tres" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://1eaojdul3w76" path="res://noise/noise.tres" id="5_lquwl"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1bvp3"]
 
@@ -62,3 +63,7 @@ texture = SubResource("RasterizedMeshTexture_w48qg")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(262, 187)
 texture = SubResource("RasterizedMeshTexture_272bh")
+
+[node name="Noise" type="Sprite2D" parent="."]
+position = Vector2(1095, 885)
+texture = ExtResource("5_lquwl")
