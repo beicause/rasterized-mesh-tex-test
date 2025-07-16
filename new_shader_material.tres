@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://byusgxbtce257"]
+
+[sub_resource type="Shader" id="Shader_p1yyq"]
+code = "shader_type mesh_rasterizer;
+
+uniform mat4 projection;
+uniform sampler2D base_texture;
+
+void vertex() {
+    POSITION = projection * POSITION;
+}
+
+void fragment() {
+    COLOR = texture(base_texture, UV);
+}
+"
+
+[resource]
+shader = SubResource("Shader_p1yyq")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
