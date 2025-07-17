@@ -1,7 +1,7 @@
 shader_type mesh_rasterizer;
 
 uniform mat4 projection;
-uniform sampler2D base_texture:source_color;
+uniform sampler2D base_texture;
 
 void vertex() {
 	POSITION.y=-POSITION.y;
@@ -9,5 +9,5 @@ void vertex() {
 }
 
 void fragment() {
-    COLOR=texture(base_texture, UV);
+    OUTPUT_COLOR = texture(base_texture, UV);
 }

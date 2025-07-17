@@ -8,5 +8,5 @@ void vertex() {
 }
 
 void fragment() {
-    COLOR = texture(base_texture, UV);
+    OUTPUT_COLOR = texture(base_texture, UV);
 }

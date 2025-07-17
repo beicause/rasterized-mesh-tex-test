@@ -17,7 +17,7 @@ shader_parameter/base_texture = ExtResource("1_0xm2m")
 text = "Hellow"
 
 [sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_7mycd"]
-bg_color = Color(0.5370987, 0.106126174, 0.785777, 1)
+clear_color = Color(0.5370987, 0.106126174, 0.785777, 1)
 mesh = SubResource("TextMesh_0xm2m")
 material = SubResource("ShaderMaterial_lquwl")
 texture_format = 96
@@ -32,7 +32,7 @@ shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.
 shader_parameter/base_texture = ExtResource("1_0xm2m")
 
 [sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_w48qg"]
-bg_color = Color(0.09362073, 0.017662438, 0.04212829, 0.54901963)
+clear_color = Color(0.09362073, 0.017662438, 0.04212829, 0.54901963)
 mesh = ExtResource("2_h2yge")
 material = SubResource("ShaderMaterial_dg77c")
 
@@ -42,7 +42,7 @@ shader_parameter/projection = Projection(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0,
 shader_parameter/base_texture = ExtResource("1_0xm2m")
 
 [sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_272bh"]
-bg_color = Color(0.8509804, 0.2, 0.27450982, 1)
+clear_color = Color(0.8509804, 0.2, 0.27450982, 1)
 mesh = ExtResource("4_1bvp3")
 material = SubResource("ShaderMaterial_7mycd")
 

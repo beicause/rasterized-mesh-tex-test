@@ -100,5 +100,5 @@ void fragment() {
 		val = round(val * terrace) / terrace;
 	}
 
-	COLOR = vec4(val, 0.0, 0.0, 1.0);
+	OUTPUT_COLOR = vec4(val, 0.0, 0.0, 1.0);
 }
