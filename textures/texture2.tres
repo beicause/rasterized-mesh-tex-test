@@ -1,0 +1,15 @@
+[gd_resource type="RasterizedMeshTexture" load_steps=5 format=3 uid="uid://cltqr8lscp6yk"]
+
+[ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://base_tex.gdshader" id="1_x5uu0"]
+[ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_qr61t"]
+[ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="3_p51bj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
+shader = ExtResource("1_x5uu0")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.38, 0.555, 0, 1)
+shader_parameter/base_texture = ExtResource("2_qr61t")
+
+[resource]
+clear_color = Color(0.09362073, 0.017662438, 0.04212829, 0.54901963)
+mesh = ExtResource("3_p51bj")
+material = SubResource("ShaderMaterial_dg77c")

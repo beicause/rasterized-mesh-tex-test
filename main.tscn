@@ -1,50 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://2bfqeuhf8nf"]
+[gd_scene load_steps=7 format=3 uid="uid://2bfqeuhf8nf"]
 
-[ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="1_0xm2m"]
-[ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://base_tex.gdshader" id="2_1bvp3"]
-[ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://Untitled.obj" id="2_h2yge"]
-[ext_resource type="ArrayMesh" path="res://2d_mesh.tres" id="4_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://1eaojdul3w76" path="res://noise/noise.tres" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://cgsqdtqsi5l4x" path="res://textures/texture3.tres" id="1_7mycd"]
+[ext_resource type="Texture2D" uid="uid://cltqr8lscp6yk" path="res://textures/texture2.tres" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://0pt2gqmbim0q" path="res://textures/texture1.tres" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://1eaojdul3w76" path="res://textures/texture4.tres" id="5_lquwl"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1bvp3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
-shader = ExtResource("2_1bvp3")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0.4)
-shader_parameter/base_texture = ExtResource("1_0xm2m")
-
-[sub_resource type="TextMesh" id="TextMesh_0xm2m"]
-text = "Hellow"
-
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_7mycd"]
-clear_color = Color(0.5370987, 0.106126174, 0.785777, 1)
-mesh = SubResource("TextMesh_0xm2m")
-material = SubResource("ShaderMaterial_lquwl")
-texture_format = 96
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
 shading_mode = 0
-albedo_texture = SubResource("RasterizedMeshTexture_7mycd")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
-shader = ExtResource("2_1bvp3")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.38, 0.555, 0, 1)
-shader_parameter/base_texture = ExtResource("1_0xm2m")
-
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_w48qg"]
-clear_color = Color(0.09362073, 0.017662438, 0.04212829, 0.54901963)
-mesh = ExtResource("2_h2yge")
-material = SubResource("ShaderMaterial_dg77c")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
-shader = ExtResource("2_1bvp3")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 150)
-shader_parameter/base_texture = ExtResource("1_0xm2m")
-
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_272bh"]
-clear_color = Color(0.8509804, 0.2, 0.27450982, 1)
-mesh = ExtResource("4_1bvp3")
-material = SubResource("ShaderMaterial_7mycd")
+albedo_texture = ExtResource("1_7mycd")
 
 [node name="Node2D" type="Node2D"]
 
@@ -58,12 +23,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.55646)
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
 position = Vector2(797, 164)
-texture = SubResource("RasterizedMeshTexture_w48qg")
+texture = ExtResource("2_1bvp3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(262, 187)
-texture = SubResource("RasterizedMeshTexture_272bh")
+texture = ExtResource("3_lquwl")
 
 [node name="Noise" type="Sprite2D" parent="."]
 position = Vector2(1095, 885)
 texture = ExtResource("5_lquwl")
+
+[node name="Texture1" type="Sprite2D" parent="."]
+position = Vector2(1312, 144)
+texture = ExtResource("1_7mycd")

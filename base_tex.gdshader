@@ -4,7 +4,6 @@ uniform mat4 projection;
 uniform sampler2D base_texture;
 
 void vertex() {
-	POSITION.y=-POSITION.y;
     POSITION = projection * POSITION;
 }
 
