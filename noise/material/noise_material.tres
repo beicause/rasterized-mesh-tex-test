@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://hqn11fayjmj5"]
 
-[ext_resource type="Shader" uid="uid://dufckbcem6hhu" path="res://noise/material/shader/noise_unify.gdshader" id="1_ayou4"]
+[ext_resource type="Shader" uid="uid://dufckbcem6hhu" path="res://noise/shader/noise_unify.gdshader" id="1_ayou4"]
 
 [sub_resource type="Curve" id="Curve_xo04b"]
 _data = [Vector2(0, 1), 0.0, -3.3333333, 0, 1, Vector2(0.3, 0), -3.3333333, 0.0, 1, 0]

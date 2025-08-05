@@ -9,7 +9,7 @@ shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 
 shader_parameter/base_texture = ExtResource("2_62rns")
 
 [sub_resource type="TextMesh" id="TextMesh_0xm2m"]
-text = "Hellow"
+text = "Hello"
 
 [resource]
 clear_color = Color(0.5370987, 0.106126174, 0.785777, 1)
