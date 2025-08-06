@@ -22,3 +22,10 @@ project/assembly_name="rasterized-mesh-tex"
 [rendering]
 
 renderer/rendering_method="mobile"
+
+[shader_globals]
+
+global_color={
+"type": "color",
+"value": Color(1, 1, 1, 1)
+}

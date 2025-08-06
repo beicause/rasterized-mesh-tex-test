@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://2bfqeuhf8nf"]
+[gd_scene load_steps=9 format=3 uid="uid://2bfqeuhf8nf"]
 
 [ext_resource type="Texture2D" uid="uid://cgsqdtqsi5l4x" path="res://textures/texture3.tres" id="1_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cltqr8lscp6yk" path="res://textures/texture2.tres" id="2_1bvp3"]
@@ -11,6 +11,12 @@
 shading_mode = 0
 albedo_texture = ExtResource("1_7mycd")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+shading_mode = 0
+albedo_texture = ExtResource("5_lquwl")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -19,7 +25,7 @@ mesh = SubResource("SphereMesh_1bvp3")
 surface_material_override/0 = SubResource("StandardMaterial3D_lquwl")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.55646)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28027856, 0, 1.55646)
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
 position = Vector2(797, 164)
@@ -36,3 +42,8 @@ texture = ExtResource("5_lquwl")
 [node name="Texture1" type="Sprite2D" parent="."]
 position = Vector2(1312, 144)
 texture = ExtResource("1_7mycd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7969785, 0, 0)
+material_override = SubResource("StandardMaterial3D_1bvp3")
+mesh = SubResource("BoxMesh_1bvp3")

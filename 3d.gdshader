@@ -1,7 +1,7 @@
 shader_type mesh_rasterizer;
 
 uniform mat4 projection;
-uniform sampler2D base_texture;
+uniform sampler2D base_texture: source_color;
 
 void vertex() {
     POSITION = projection * POSITION;
