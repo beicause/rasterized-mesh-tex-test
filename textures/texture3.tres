@@ -1,10 +1,10 @@
 [gd_resource type="RasterizedMeshTexture" load_steps=5 format=3 uid="uid://cgsqdtqsi5l4x"]
 
-[ext_resource type="Shader" uid="uid://cplcnr8h0tlar" path="res://3d.gdshader" id="1_qplew"]
+[ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://base_tex.gdshader" id="1_xmy2k"]
 [ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_62rns"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
-shader = ExtResource("1_qplew")
+shader = ExtResource("1_xmy2k")
 shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0.4)
 shader_parameter/base_texture = ExtResource("2_62rns")
 

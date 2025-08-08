@@ -1,7 +1,7 @@
 [gd_resource type="RasterizedMeshTexture" load_steps=3 format=3 uid="uid://1eaojdul3w76"]
 
 [ext_resource type="Material" uid="uid://hqn11fayjmj5" path="res://noise/material/noise_material.tres" id="1_qfupx"]
-[ext_resource type="ArrayMesh" uid="uid://c2dffdal0i6wh" path="res://empty_triangle_mesh.tres" id="2_jwknm"]
+[ext_resource type="ArrayMesh" uid="uid://c2dffdal0i6wh" path="res://mesh/empty_triangle_mesh.tres" id="2_jwknm"]
 
 [resource]
 width = 1024

@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://base_tex.gdshader" id="1_62rns"]
 [ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_uau7e"]
-[ext_resource type="ArrayMesh" path="res://2d_mesh.tres" id="3_42lxn"]
+[ext_resource type="ArrayMesh" uid="uid://c65jsy84y8mb4" path="res://mesh/2d_mesh.tres" id="3_42lxn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 shader = ExtResource("1_62rns")
