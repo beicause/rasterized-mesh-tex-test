@@ -1,10 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://2bfqeuhf8nf"]
+[gd_scene load_steps=12 format=3 uid="uid://2bfqeuhf8nf"]
 
 [ext_resource type="Texture2D" uid="uid://cgsqdtqsi5l4x" path="res://textures/texture3.tres" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://4nhaam2rmekj" path="res://node_3d.tscn" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://cltqr8lscp6yk" path="res://textures/texture2.tres" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://0pt2gqmbim0q" path="res://textures/texture1.tres" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://1eaojdul3w76" path="res://textures/texture4.tres" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="6_7mycd"]
+
+[sub_resource type="Shader" id="Shader_lquwl"]
+code = "shader_type mesh_rasterizer;
+
+uniform vec2 size;
+uniform vec2 offset;
+uniform vec2 region;
+uniform sampler2D source_tex: source_color;
+uniform vec4 modulate: source_color = vec4(1.0);
+
+void vertex(){
+	POSITION.xy = region/size * POSITION.xy + offset/size;
+	POSITION.w=0.5;
+}
+
+void fragment(){
+	OUTPUT_COLOR = modulate * texture(source_tex, UV);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
+shader = SubResource("Shader_lquwl")
+shader_parameter/size = Vector2(256, 256)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/region = Vector2(256, 256)
+shader_parameter/source_tex = ExtResource("6_7mycd")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_272bh"]
+
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_272bh"]
+mesh = SubResource("QuadMesh_272bh")
+material = SubResource("ShaderMaterial_7mycd")
+
+[sub_resource type="GDScript" id="GDScript_7mycd"]
+script/source = "extends Sprite2D
+
+func _process(delta: float) -> void:
+	texture.force_draw()
+	RenderingServer.texture_drawable_blit_rect(texture.get_rid(),Rect2i(0,0,50,50),
+	load(\"res://icon.svg\").get_rid(),Color.RED,RenderingServer.BLEND_MODE_DISABLED,Color())
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -25,3 +67,8 @@ texture = ExtResource("5_lquwl")
 [node name="Texture1" type="Sprite2D" parent="."]
 position = Vector2(1312, 144)
 texture = ExtResource("1_7mycd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(236, 503)
+texture = SubResource("RasterizedMeshTexture_272bh")
+script = SubResource("GDScript_7mycd")
