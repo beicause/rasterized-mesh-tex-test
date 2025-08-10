@@ -1,13 +1,18 @@
-[gd_resource type="RasterizedMeshTexture" load_steps=5 format=3 uid="uid://cltqr8lscp6yk"]
+[gd_resource type="RasterizedMeshTexture" load_steps=6 format=3 uid="uid://cltqr8lscp6yk"]
 
 [ext_resource type="Shader" uid="uid://cnkp5gwk5g3ta" path="res://base_tex.gdshader" id="1_x5uu0"]
-[ext_resource type="Texture2D" uid="uid://8uttoilui1ff" path="res://icon.svg" id="2_qr61t"]
 [ext_resource type="ArrayMesh" uid="uid://cqwslyv7sb757" path="res://mesh/Untitled.obj" id="3_p51bj"]
+
+[sub_resource type="Gradient" id="Gradient_w350d"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_50qd0"]
+gradient = SubResource("Gradient_w350d")
+fill_from = Vector2(0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
 shader = ExtResource("1_x5uu0")
-shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.38, 0.555, 0, 1)
-shader_parameter/base_texture = ExtResource("2_qr61t")
+shader_parameter/projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.205, 0.555, 0, 1)
+shader_parameter/base_texture = SubResource("GradientTexture2D_50qd0")
 
 [resource]
 clear_color = Color(0.09362073, 0.017662438, 0.04212829, 0.54901963)

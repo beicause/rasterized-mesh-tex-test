@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2bfqeuhf8nf"]
+[gd_scene load_steps=17 format=3 uid="uid://2bfqeuhf8nf"]
 
 [ext_resource type="Texture2D" uid="uid://cgsqdtqsi5l4x" path="res://textures/texture3.tres" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://4nhaam2rmekj" path="res://node_3d.tscn" id="1_lquwl"]
@@ -42,16 +42,39 @@ code = "		shader_type mesh_rasterizer;
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 shader = SubResource("Shader_lquwl")
 shader_parameter/size = Vector2(256, 256)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/region = Vector2(50, 128)
+shader_parameter/offset = Vector2(50, 50)
+shader_parameter/region = Vector2(55.87, 128)
 shader_parameter/source_tex = ExtResource("6_7mycd")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_272bh"]
 
 [sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_5vw27"]
+clear_color = Color(0, 0, 0, 1)
 mesh = SubResource("QuadMesh_272bh")
 material = SubResource("ShaderMaterial_7mycd")
+
+[sub_resource type="Shader" id="Shader_7mycd"]
+code = "shader_type mesh_rasterizer;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	OUTPUT_COLOR=vec4(1.0);
+	// Called for every pixel the material is visible on.
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = SubResource("Shader_7mycd")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
+
+[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_7mycd"]
+mesh = SubResource("QuadMesh_7mycd")
+material = SubResource("ShaderMaterial_272bh")
 
 [node name="Node2D" type="Node2D"]
 
@@ -70,7 +93,7 @@ position = Vector2(1095, 885)
 texture = ExtResource("5_lquwl")
 
 [node name="Texture1" type="Sprite2D" parent="."]
-position = Vector2(1312, 144)
+position = Vector2(1036, 495)
 texture = ExtResource("1_7mycd")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -81,3 +104,7 @@ script = SubResource("GDScript_7mycd")
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 position = Vector2(273, 938)
 texture = SubResource("RasterizedMeshTexture_5vw27")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(462, 913)
+texture = SubResource("RasterizedMeshTexture_7mycd")

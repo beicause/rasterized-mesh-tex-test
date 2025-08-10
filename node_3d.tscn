@@ -17,6 +17,7 @@ albedo_texture = ExtResource("2_a0tk4")
 
 [sub_resource type="Shader" id="Shader_noarx"]
 code = "shader_type spatial;
+render_mode unshaded;
 
 uniform sampler2D normal_tex:source_color;
 
