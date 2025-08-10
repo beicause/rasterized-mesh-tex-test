@@ -18,3 +18,4 @@ shader_parameter/base_texture = SubResource("GradientTexture2D_50qd0")
 clear_color = Color(0.09362073, 0.017662438, 0.04212829, 0.54901963)
 mesh = ExtResource("3_p51bj")
 material = SubResource("ShaderMaterial_dg77c")
+generate_mipmaps = true
