@@ -46,7 +46,7 @@ extends Sprite2D
 
 func _ready() -> void:
 	var tex_drawable = DrawableTexture2D.new()
-	tex_drawable.setup(Vector2i(256,256),RenderingDevice.DATA_FORMAT_R8G8B8A8_SRGB)
+	tex_drawable.setup(Vector2i(256,256),RenderingServer.TEXTURE_DRAWABLE_FORMAT_RGBA8_SRGB)
 	tex_drawable.blit_rect(Rect2i(0,0,256,256),load(\"res://icon.svg\"),Color.WHITE,RenderingServer.BLEND_MODE_CLEAR,Color())
 	tex_drawable.blit_rect(Rect2i(0,0,50,50),load(\"res://icon.svg\"),Color.RED,RenderingServer.BLEND_MODE_ADD,Color())
 	texture=tex_drawable
@@ -117,7 +117,7 @@ extends ColorRect
 
 func _ready() -> void:
 	var tex_drawable = DrawableTexture2DArray.new()
-	tex_drawable.setup(Vector2i(256,256),4,TextureLayered.LAYERED_TYPE_2D_ARRAY,RenderingDevice.DATA_FORMAT_R8G8B8A8_SRGB)
+	tex_drawable.setup(Vector2i(256,256),4,TextureLayered.LAYERED_TYPE_2D_ARRAY,RenderingServer.TEXTURE_DRAWABLE_FORMAT_RGBA8_SRGB)
 	tex_drawable.blit_rect(Rect2i(0,0,256,256),load(\"res://icon.svg\"),Color.WHITE,RenderingServer.BLEND_MODE_CLEAR,Color(),0)
 	tex_drawable.blit_rect(Rect2i(0,0,50,50),load(\"res://icon.svg\"),Color.RED,RenderingServer.BLEND_MODE_ADD,Color(),1)
 	(material as ShaderMaterial).set_shader_parameter(\"tex_array\",tex_drawable)
