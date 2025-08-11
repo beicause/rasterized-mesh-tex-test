@@ -86,26 +86,42 @@ mesh = SubResource("QuadMesh_272bh")
 material = SubResource("ShaderMaterial_7mycd")
 
 [sub_resource type="Shader" id="Shader_7mycd"]
-code = "shader_type mesh_rasterizer;
+code = "shader_type canvas_item;
+
+uniform sampler2DArray tex_array;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	OUTPUT_COLOR=vec4(1.0);
+	COLOR = texture(tex_array,vec3(UV,0));
 	// Called for every pixel the material is visible on.
 }
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
 "
+
+[sub_resource type="DrawableTexture2DArray" id="DrawableTexture2DArray_272bh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = SubResource("Shader_7mycd")
+shader_parameter/tex_array = SubResource("DrawableTexture2DArray_272bh")
 
-[sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
+[sub_resource type="GDScript" id="GDScript_272bh"]
+script/source = "@tool
+extends ColorRect
 
-[sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_7mycd"]
-mesh = SubResource("QuadMesh_7mycd")
-material = SubResource("ShaderMaterial_272bh")
+func _ready() -> void:
+	var tex_drawable = DrawableTexture2DArray.new()
+	tex_drawable.setup(Vector2i(256,256),4,TextureLayered.LAYERED_TYPE_2D_ARRAY,RenderingDevice.DATA_FORMAT_R8G8B8A8_SRGB)
+	tex_drawable.blit_rect(Rect2i(0,0,256,256),load(\"res://icon.svg\"),Color.WHITE,RenderingServer.BLEND_MODE_CLEAR,Color(),0)
+	tex_drawable.blit_rect(Rect2i(0,0,50,50),load(\"res://icon.svg\"),Color.RED,RenderingServer.BLEND_MODE_ADD,Color(),1)
+	(material as ShaderMaterial).set_shader_parameter(\"tex_array\",tex_drawable)
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -137,6 +153,10 @@ script = SubResource("GDScript_7mycd")
 position = Vector2(273, 938)
 texture = SubResource("RasterizedMeshTexture_5vw27")
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-position = Vector2(462, 913)
-texture = SubResource("RasterizedMeshTexture_7mycd")
+[node name="LayeredTest" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_272bh")
+offset_left = 101.0
+offset_top = 1073.0
+offset_right = 357.0
+offset_bottom = 1329.0
+script = SubResource("GDScript_272bh")
