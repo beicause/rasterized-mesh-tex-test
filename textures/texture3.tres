@@ -15,3 +15,4 @@ text = "Hello"
 clear_color = Color(0.5370987, 0.106126174, 0.785777, 1)
 mesh = SubResource("TextMesh_0xm2m")
 material = SubResource("ShaderMaterial_lquwl")
+texture_format = 96

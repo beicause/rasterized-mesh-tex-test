@@ -47,38 +47,45 @@ extends Sprite2D
 func _ready() -> void:
 	var tex_drawable = DrawableTexture2D.new()
 	tex_drawable.setup(Vector2i(256,256),RenderingServer.TEXTURE_DRAWABLE_FORMAT_RGBA8_SRGB)
-	tex_drawable.blit_rect(Rect2i(0,0,256,256),load(\"res://icon.svg\"),Color.WHITE,RenderingServer.BLEND_MODE_CLEAR,Color())
-	tex_drawable.blit_rect(Rect2i(0,0,50,50),load(\"res://icon.svg\"),Color.RED,RenderingServer.BLEND_MODE_ADD,Color())
+	tex_drawable.blit_texture_rect_region(load(\"res://icon.svg\"),Rect2(10,10,128,128),Rect2(0,0,256,256),Color.WHITE,RenderingServer.TEXTURE_DRAWABLE_BLEND_CLEAR,Color())
+	tex_drawable.blit_texture_rect(load(\"res://icon.svg\"),Rect2(0,0,50,50),Color.RED,RenderingServer.TEXTURE_DRAWABLE_BLEND_ADD,Color())
 	texture=tex_drawable
 "
 
 [sub_resource type="Shader" id="Shader_lquwl"]
 code = "		shader_type mesh_rasterizer;
 
-		uniform vec2 size;
-		uniform vec2 offset;
-		uniform vec2 region;
-		uniform sampler2D source_tex: source_color;
+		uniform vec2 dst_size;
+		uniform vec2 src_size;
+		uniform vec2 dst_offset;
+		uniform vec2 src_offset;
+		uniform vec2 dst_region;
+		uniform vec2 src_region;
+		uniform sampler2D src_tex: source_color,repeat_enable;
 		uniform vec4 modulate: source_color = vec4(1.0);
 
 		void vertex(){
-			POSITION.xy = region/size * POSITION.xy + (offset-(size-region)/2.0)/size;
-			POSITION.w=0.5;
+			POSITION.xy = dst_region / dst_size * POSITION.xy + (dst_offset - dst_size + dst_region) / dst_size;
 		}
 
 		void fragment(){
-			OUTPUT_COLOR = modulate * texture(source_tex, UV);
+			vec2 uv = src_region / src_size * UV + src_offset / src_size;
+			OUTPUT_COLOR = modulate * texture(src_tex, uv);
 		}"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 shader = SubResource("Shader_lquwl")
-shader_parameter/size = Vector2(256, 256)
-shader_parameter/offset = Vector2(50, 50)
-shader_parameter/region = Vector2(55.87, 128)
-shader_parameter/source_tex = ExtResource("6_7mycd")
+shader_parameter/dst_size = Vector2(256, 256)
+shader_parameter/src_size = Vector2(128, 128)
+shader_parameter/dst_offset = Vector2(64, 64)
+shader_parameter/src_offset = Vector2(64, 64)
+shader_parameter/dst_region = Vector2(128, 128)
+shader_parameter/src_region = Vector2(256, 256)
+shader_parameter/src_tex = ExtResource("6_7mycd")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_272bh"]
+size = Vector2(2, 2)
 
 [sub_resource type="RasterizedMeshTexture" id="RasterizedMeshTexture_5vw27"]
 clear_color = Color(0, 0, 0, 1)
@@ -125,10 +132,10 @@ extends ColorRect
 func _ready() -> void:
 	var tex_arr = DrawableTexture2DArray.new()
 	tex_arr.setup(Vector2i(256,256),4,TextureLayered.LAYERED_TYPE_2D_ARRAY,RenderingServer.TEXTURE_DRAWABLE_FORMAT_RGBA8_SRGB, true)
-	tex_arr.blit_rect(Rect2i(0,0,256,256),load(\"res://icon.svg\"),Color.WHITE,RenderingServer.BLEND_MODE_CLEAR,Color(),0)
-	tex_arr.blit_rect(Rect2i(0,0,50,50),load(\"res://icon.svg\"),Color.RED,RenderingServer.BLEND_MODE_CLEAR,Color(),1)
-	tex_arr.blit_rect(Rect2i(0,0,256,256),load(\"res://icon.svg\"),Color.YELLOW,RenderingServer.BLEND_MODE_CLEAR,Color(),2)
-	tex_arr.blit_rect(Rect2i(0,0,50,50),load(\"res://icon.svg\"),Color.GREEN,RenderingServer.BLEND_MODE_CLEAR,Color(0.952, 0.446, 0.624, 1.0),3)
+	tex_arr.blit_texture_rect(load(\"res://icon.svg\"),Rect2(0,0,256,256),Color.WHITE,RenderingServer.TEXTURE_DRAWABLE_BLEND_CLEAR,Color(),0)
+	tex_arr.blit_texture_rect(load(\"res://icon.svg\"),Rect2(0,0,50,50),Color.RED,RenderingServer.TEXTURE_DRAWABLE_BLEND_CLEAR,Color(),1)
+	tex_arr.blit_texture_rect_region(load(\"res://icon.svg\"),Rect2(10,10,128,128),Rect2(64,64,128,128),Color.BLUE,RenderingServer.TEXTURE_DRAWABLE_BLEND_CLEAR,Color(),2)
+	tex_arr.blit_texture_rect(load(\"res://icon.svg\"),Rect2(0,0,50,50),Color.GREEN,RenderingServer.TEXTURE_DRAWABLE_BLEND_CLEAR,Color(0.952, 0.446, 0.624, 1.0),3)
 	tex_arr.generate_mipmaps(0);
 	tex_arr.generate_mipmaps(1);
 	tex_arr.generate_mipmaps(2);
@@ -163,7 +170,7 @@ texture = SubResource("DrawableTexture2D_7mycd")
 script = SubResource("GDScript_7mycd")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(273, 938)
+position = Vector2(490, 533)
 texture = SubResource("RasterizedMeshTexture_5vw27")
 
 [node name="LayeredTest" type="ColorRect" parent="."]
