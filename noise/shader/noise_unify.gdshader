@@ -2,7 +2,7 @@ shader_type mesh_rasterizer;
 
 #include "uid://c8j7ucouq0uf8"
 
-uniform vec3 size = vec3(1024.0);
+uniform vec2 size = vec2(1024.0);
 uniform vec2 offset = vec2(0.0);
 
 uniform int noise_seed = 1337;
@@ -87,9 +87,9 @@ void fragment() {
 	FNLfloat val;
 
 	if (!is_3d) {
-		val = fnlGetNoise2D(state, uv.x * size.x + offset.x, uv.y * size.y + offset.y) / 2.0 + 0.5;
+		val = fnlGetNoise2D(state, uv.x * size.x + offset.x * 2.0, uv.y * size.y + offset.y * 2.0) / 2.0 + 0.5;
 	} else {
-		val = fnlGetNoise3D(state, uv.x * size.x + offset.x, uv.y * size.y + offset.y, depth * size.z) / 2.0 + 0.5;
+		val = fnlGetNoise3D(state, uv.x * size.x + offset.x * 2.0, uv.y * size.y + offset.y * 2.0, depth) / 2.0 + 0.5;
 	}
 
 	if (remap_enabled) {

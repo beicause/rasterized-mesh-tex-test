@@ -14,7 +14,7 @@ curve = SubResource("Curve_xo04b")
 
 [resource]
 shader = ExtResource("1_ayou4")
-shader_parameter/size = Vector3(1024, 1024, 1024)
+shader_parameter/size = Vector2(1024, 1024)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/noise_seed = 1337
 shader_parameter/noise_frequency = 0.01499999999941792
