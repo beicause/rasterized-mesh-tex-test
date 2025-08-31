@@ -61,13 +61,26 @@ uniform bool is_3d = false;
 uniform float depth : hint_range(0.0, 1.0, 0.0001) = 0.0;
 
 void vertex() {
-	vec2 base_arr[3] = vec2[](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));
-	POSITION = vec4(base_arr[VERTEX_ID], 0.0, 1.0);
-	UV = clamp(POSITION.xy, vec2(0.0, 0.0), vec2(1.0, 1.0)) * 2.0; // saturate(x) * 2.0
+    // old code, ARM driver bug on Mali-GXXx GPUs and Vulkan API 1.3.xxx
+	// https://github.com/godotengine/godot/pull/92817#issuecomment-2168625982
+	// vec2 base_arr[3] = vec2[](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));
+	// POSITION = vec4(base_arr[VERTEX_ID], 0.0, 1.0);
+	// UV = clamp(POSITION.xy, vec2(0.0, 0.0), vec2(1.0, 1.0)) * 2.0; // saturate(x) * 2.0
+
+	vec2 vertex_base;
+	if (VERTEX_ID == 0) {
+		vertex_base = vec2(-1.0, -1.0);
+	} else if (VERTEX_ID == 1) {
+		vertex_base = vec2(3.0, -1.0);
+	} else {
+		vertex_base = vec2(-1.0, 3.0);
+	}
+	POSITION = vec4(vertex_base, 0.0, 1.0);
+	UV = clamp(vertex_base, vec2(0.0, 0.0), vec2(1.0, 1.0)) * 2.0; // saturate(x) * 2.0
 }
 
 void fragment() {
-	vec2 uv = UV / 2.0;
+	vec2 uv = UV;
 	fnl_state state = fnlCreateState(noise_seed);
 	state.frequency = noise_frequency; //0.01;
 	state.noise_type = noise_noise_type; //FNL_NOISE_OPENSIMPLEX2;
@@ -87,9 +100,9 @@ void fragment() {
 	FNLfloat val;
 
 	if (!is_3d) {
-		val = fnlGetNoise2D(state, uv.x * size.x + offset.x * 2.0, uv.y * size.y + offset.y * 2.0) / 2.0 + 0.5;
+		val = fnlGetNoise2D(state, uv.x * size.x + offset.x, uv.y * size.y + offset.y) / 2.0 + 0.5;
 	} else {
-		val = fnlGetNoise3D(state, uv.x * size.x + offset.x * 2.0, uv.y * size.y + offset.y * 2.0, depth) / 2.0 + 0.5;
+		val = fnlGetNoise3D(state, uv.x * size.x + offset.x, uv.y * size.y + offset.y, depth) / 2.0 + 0.5;
 	}
 
 	if (remap_enabled) {

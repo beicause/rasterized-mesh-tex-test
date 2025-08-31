@@ -149,15 +149,15 @@ func _ready() -> void:
 
 [node name="MipmapsTest" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_5vw27")
-position = Vector2(797, 164)
+position = Vector2(397, 141)
 texture = SubResource("GradientTexture2D_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(262, 187)
+position = Vector2(145, 136)
 texture = ExtResource("3_lquwl")
 
 [node name="Noise" type="Sprite2D" parent="."]
-position = Vector2(1095, 885)
+position = Vector2(592, 1201)
 texture = ExtResource("5_lquwl")
 
 [node name="Texture1" type="Sprite2D" parent="."]
@@ -170,7 +170,7 @@ texture = SubResource("DrawableTexture2D_7mycd")
 script = SubResource("GDScript_7mycd")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(490, 533)
+position = Vector2(400, 503)
 texture = SubResource("RasterizedMeshTexture_5vw27")
 
 [node name="LayeredTest" type="ColorRect" parent="."]
